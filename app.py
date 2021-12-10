@@ -1,18 +1,18 @@
 import requests
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
+# Acquire from developer.here.com
+api_key = 'Ax3DtY2b-3EWyh1do9xI2d8tpRq5-gmPIA4D-Mm0d8M'
+query = 'hospital'
+limit = 5
+URL = "https://discover.search.hereapi.com/v1/discover"
 
-
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def map_func():
-    URL = "https://discover.search.hereapi.com/v1/discover"
-    latitude = 21.2749
-    longitude = 106.1933
-    # Acquire from developer.here.com
-    api_key = 'Ax3DtY2b-3EWyh1do9xI2d8tpRq5-gmPIA4D-Mm0d8M'
-    query = 'hospital'
-    limit = 5
+    content = request.json
+    latitude = content['longtitude'] or 21
+    longitude = content['latitude'] or 106
 
     PARAMS = {
         'apikey': api_key,
