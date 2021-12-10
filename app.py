@@ -11,7 +11,7 @@ URL = "https://discover.search.hereapi.com/v1/discover"
 @app.route('/', methods=['GET', 'POST'])
 def map_func():
     content = request.json
-    latitude = content['longtitude'] or 21
+    latitude = content['longitude'] or 21
     longitude = content['latitude'] or 106
 
     PARAMS = {
@@ -40,4 +40,4 @@ def map_func():
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(host='0.0.0.0', port=80)
